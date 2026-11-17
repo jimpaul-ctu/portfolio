@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Paul is a web developer creating modern, responsive, and user-friendly websites using HTML, CSS, JavaScript, Bootstrap, ASP.NET, and SQL." />
+  <title>pauldev.io</title>
+
+  <!-- Poppins Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+  /* =========================================
+   Active Navbar Link
+========================================= */
+.navbar .nav-link {
+  font-weight: 500;
+  transition: color 0.25s ease, font-weight 0.25s ease;
+}
+
+/* Active Navbar Link: violet and bold only */
+.navbar .nav-link.active {
+  color: #6c5ce7 !important;
+  font-weight: 650 !important;
+}
+
+/* Keep it visible in dark theme too */
+body.dark-theme .navbar .nav-link.active {
+  color: #a29bfe !important;
+}
+  /* =========================================
+   Scroll Up / Down Buttons
+========================================= */
+/* =========================================
+   Smart Scroll Button
+========================================= */
+.scroll-controls {
+  position: fixed;
+  right: clamp(14px, 3vw, 28px);
+  bottom: clamp(14px, 3vw, 28px);
+  z-index: 1080;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.scroll-controls.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-btn {
+  width: clamp(44px, 10vw, 52px);
+  height: clamp(44px, 10vw, 52px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  box-shadow: 0 10px 24px rgba(108, 92, 231, 0.35);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.scroll-btn:hover,
+.scroll-btn:focus-visible {
+  transform: translateY(-4px);
+  filter: brightness(1.08);
+  box-shadow: 0 14px 30px rgba(108, 92, 231, 0.45);
+}
+
+.scroll-btn:active {
+  transform: translateY(-1px) scale(0.97);
+}
+
+.scroll-btn:focus-visible {
+  outline: 3px solid rgba(108, 92, 231, 0.55);
+  outline-offset: 3px;
+}
+
+body.dark-theme .scroll-btn {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 575.98px) {
+  .scroll-controls {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .scroll-btn {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-controls,
+  .scroll-btn {
+    transition: none;
+    animation: none;
+  }
+
+  .scroll-btn:hover,
+  .scroll-btn:focus-visible {
+    transform: none;
+  }
+}
+/* Extra space above the Skills section */
+.skills-section {
+  padding-top: 7rem;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 767.98px) {
+  .skills-section {
+    padding-top: 5rem;
+  }
+}
+
+.skills-note {
+  font-size: 0.95rem;
+}
+
+.skills-swiper {
+  overflow: hidden;
+}
+
+.skills-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0.5rem 0.25rem 1.5rem;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.skills-track::-webkit-scrollbar {
+  display: none;
+}
+
+.skills-track.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  user-select: none;
+}
+
+.skill-card {
+  flex: 0 0 auto;
+  width: min(320px, 85vw);
+  scroll-snap-align: center;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card:hover,
+.skill-card:focus-visible {
+  transform: translateY(-6px);
+}
+
+.skills-nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 575.98px) {
+  .skill-card {
+    width: min(280px, 88vw);
+  }
+}
+
+@media (min-width: 992px) {
+  .skill-card {
+    width: 320px;
+  }
+}
+/* Extra space above Projects */
+.projects-section {
+  padding-top: 7rem;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 767.98px) {
+  .projects-section {
+    padding-top: 5rem;
+  }
+}
+
+.projects-note {
+  font-size: 0.95rem;
+}
+
+.projects-swiper {
+  overflow: hidden;
+}
+
+.projects-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0.5rem 0.25rem 1.5rem;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.projects-track::-webkit-scrollbar {
+  display: none;
+}
+
+.projects-track.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  user-select: none;
+}
+
+.project-card {
+  flex: 0 0 auto;
+  width: min(340px, 85vw);
+  scroll-snap-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-6px);
+}
+
+.projects-nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 575.98px) {
+  .project-card {
+    width: min(300px, 88vw);
+  }
+}
+
+@media (min-width: 992px) {
+  .project-card {
+    width: 340px;
+  }
+}
+</style>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#home">
+        <i class="bi bi-code-slash brand-icon me-2"></i>
+        Paul<span class="text-accent">.</span>
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navMenu"
+        aria-controls="navMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 fs-6">
+          <li class="nav-item">
+            <a class="nav-link py-1 px-2 active" href="#home">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link py-1 px-2" href="#about">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link py-1 px-2" href="#skills">Skills</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link py-1 px-2" href="#projects">Projects</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link py-1 px-2" href="#contact">Contact</a>
+          </li>
+
+          <li class="nav-item ms-lg-1">
+            <a class="btn btn-accent btn-sm rounded-pill px-3" href="#contact">Hire Me</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Hero -->
+  <header id="home" class="hero d-flex align-items-center">
+    <div class="container">
+      <div class="row align-items-center gy-5">
+        <div class="col-lg-7 reveal-left">
+          <span class="badge rounded-pill hero-badge mb-3">
+            <i class="bi bi-circle-fill small-dot"></i> Available for work
+          </span>
+
+          <h1 class="display-3 fw-bold mb-3">
+            Hi, I’m <span class="name-highlight">Paul</span>.
+          </h1>
+
+          <p class="lead text-muted mb-4">
+            I create clean, elegant, and responsive websites using HTML, CSS, JavaScript, and Bootstrap.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#projects" class="btn btn-accent btn-lg rounded-pill px-4">
+              <i class="bi bi-collection me-2"></i> View Projects
+            </a>
+
+            <a href="#contact" class="btn btn-outline-dark btn-lg rounded-pill px-4">
+              <i class="bi bi-chat-dots me-2"></i> Contact Me
+            </a>
+          </div>
+
+          <div class="d-flex gap-3 mt-4 social-links">
+            <a
+              href="https://github.com/jimpaul-ctu"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <i class="bi bi-github"></i>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/jimpaul-ctu"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <i class="bi bi-linkedin"></i>
+            </a>
+
+            <a
+              href="https://www.instagram.com/your-username"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <i class="bi bi-instagram"></i>
+            </a>
+
+            <a href="mailto:orchestratorweb@gmail.com" aria-label="Email">
+              <i class="bi bi-envelope"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-5 text-center reveal-right">
+          <div class="profile-card mx-auto">
+            <img
+              src="Polished Formal Portrait on White.png"
+              alt="Professional portrait of Paul"
+              class="profile-img"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+ <!-- About -->
+<section id="about" class="section about-section p-0">
+  <div class="about-merged">
+    <img
+      src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1920&q=80"
+      alt="Developer working on a website"
+      class="about-bg-image"
+      loading="lazy"
+    >
+
+    <div class="about-overlay"></div>
+
+    <div class="container about-merged-content">
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-10 text-center text-lg-start">
+          <div class="text-center mb-4 reveal">
+            <span class="section-tag about-tag">
+              <i class="bi bi-person-lines-fill me-2"></i> About Me
+            </span>
+
+            <h2 class="section-title text-white">
+              A little about who I am
+            </h2>
+          </div>
+
+          <div class="row g-4 align-items-center">
+            <!-- Left: introduction -->
+            <div class="col-12 col-lg-7 about-left reveal-left">
+              <h3 class="about-title fw-bold mb-3 text-white">
+                <i class="bi bi-hand-thumbs-up me-2"></i> Hello! I’m Paul
+              </h3>
+
+              <p class="about-text">
+                I’m a passionate web developer focused on creating modern, accessible, and responsive websites.
+                I enjoy turning ideas into clean digital experiences that are easy to use and visually appealing.
+              </p>
+
+              <p class="about-text">
+                My main tools include
+                <strong>HTML, CSS, JavaScript, Bootstrap, ASP.NET, and SQL</strong>.
+                I focus on clean code, responsive layouts, and thoughtful user interfaces.
+              </p>
+
+              <div class="about-buttons d-flex flex-wrap gap-3 mt-4">
+                <a href="#contact" class="btn btn-accent rounded-pill px-4">
+                  <i class="bi bi-envelope-paper me-2"></i> Contact Me
+                </a>
+
+                <a href="#projects" class="btn about-outline-btn rounded-pill px-4">
+                  <i class="bi bi-arrow-right-circle me-2"></i> View Projects
+                </a>
+              </div>
+            </div>
+
+            <!-- Right: information cards -->
+            <div class="col-12 col-lg-5 reveal-right">
+              <div class="about-info">
+                <div class="info-item about-info-item">
+                  <i class="bi bi-person"></i>
+
+                  <div class="about-info-content">
+                    <small>Name</small>
+                    <p class="mb-0 text-white">Paul</p>
+                  </div>
+                </div>
+
+                <div class="info-item about-info-item">
+                  <i class="bi bi-geo-alt"></i>
+
+                  <div class="about-info-content">
+                    <small>Location</small>
+                    <p class="mb-0 text-white">Remote / Worldwide</p>
+                  </div>
+                </div>
+
+                <div class="info-item about-info-item">
+                  <i class="bi bi-envelope"></i>
+
+                  <div class="about-info-content">
+                    <small>Email</small>
+                    <p class="mb-0">
+                      <a
+                        class="about-link"
+                        href="mailto:orchestratorweb@gmail.com"
+                      >
+                        orchestratorweb@gmail.com
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="info-item about-info-item">
+                  <i class="bi bi-github"></i>
+
+                  <div class="about-info-content">
+                    <small>GitHub</small>
+                    <p class="mb-0">
+                      <a
+                        class="about-link"
+                        href="https://github.com/jimpaul-ctu"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        github.com/jimpaul-ctu
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Skills -->
+<section id="skills" class="section section-alt skills-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-tag">
+        <i class="bi bi-tools me-2"></i> Skills
+      </span>
+
+      <h2 class="section-title">Technologies I use</h2>
+
+      <p class="section-description">
+        I build responsive, user-friendly websites and data-driven web applications
+        using modern front-end and back-end tools. Click any skill to explore its
+        documentation or related work.
+      </p>
+
+      <p class="skills-note text-muted mt-3 mb-0">
+        Swipe or drag horizontally to explore the technologies I work with.
+      </p>
+    </div>
+
+    <div class="skills-swiper reveal">
+      <div
+        class="skills-track"
+        id="skillsTrack"
+        tabindex="0"
+        aria-label="Technologies I use"
+      >
+        <!-- HTML -->
+        <a
+          class="skill-card skill-card-link p-4 text-center"
+          href="https://developer.mozilla.org/en-US/docs/Web/HTML"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="bi bi-filetype-html skill-icon"></i>
+
+          <h5 class="fw-bold mt-3 mb-2">HTML</h5>
+
+          <p class="text-muted small mb-3">
+            Semantic structure, accessibility, and clean page markup.
+          </p>
+
+          <span class="skill-link-label">
+            Learn HTML
+            <i class="bi bi-arrow-up-right ms-1"></i>
+          </span>
+        </a>
+
+        <!-- CSS -->
+        <a
+          class="skill-card skill-card-link p-4 text-center"
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="bi bi-filetype-css skill-icon"></i>
+
+          <h5 class="fw-bold mt-3 mb-2">CSS</h5>
+
+          <p class="text-muted small mb-3">
+            Responsive layouts, animations, and polished visual design.
+          </p>
+
+          <span class="skill-link-label">
+            Learn CSS
+            <i class="bi bi-arrow-up-right ms-1"></i>
+          </span>
+        </a>
+
+        <!-- JavaScript -->
+        <a
+          class="skill-card skill-card-link p-4 text-center"
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="bi bi-filetype-js skill-icon"></i>
+
+          <h5 class="fw-bold mt-3 mb-2">JavaScript</h5>
+
+          <p class="text-muted small mb-3">
+            Interactive features, dynamic content, and user experiences.
+          </p>
+
+          <span class="skill-link-label">
+            Learn JavaScript
+            <i class="bi bi-arrow-up-right ms-1"></i>
+          </span>
+        </a>
+
+        <!-- Bootstrap -->
+        <a
+          class="skill-card skill-card-link p-4 text-center"
+          href="https://getbootstrap.com/docs/5.3/getting-started/introduction/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="bi bi-bootstrap skill-icon"></i>
+
+          <h5 class="fw-bold mt-3 mb-2">Bootstrap</h5>
+
+          <p class="text-muted small mb-3">
+            Fast responsive components, grids, and clean modern layouts.
+          </p>
+
+          <span class="skill-link-label">
+            Explore Bootstrap
+            <i class="bi bi-arrow-up-right ms-1"></i>
+          </span>
+        </a>
+
+        <!-- ASP.NET -->
+        <a
+          class="skill-card skill-card-link p-4 text-center"
+          href="https://learn.microsoft.com/en-us/aspnet/core/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="bi bi-globe2 skill-icon"></i>
+
+          <h5 class="fw-bold mt-3 mb-2">ASP.NET</h5>
+
+          <p class="text-muted small mb-3">
+            Building secure, dynamic, and data-driven web applications.
+          </p>
+
+          <span class="skill-link-label">
+            Explore ASP.NET
+            <i class="bi bi-arrow-up-right ms-1"></i>
+          </span>
+        </a>
+
+        <!-- SQL -->
+        <a
+          class="skill-card skill-card-link p-4 text-center"
+          href="https://www.w3schools.com/sql/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="bi bi-database skill-icon"></i>
+
+          <h5 class="fw-bold mt-3 mb-2">SQL</h5>
+
+          <p class="text-muted small mb-3">
+            Designing, querying, and managing relational databases.
+          </p>
+
+          <span class="skill-link-label">
+            Explore SQL
+            <i class="bi bi-arrow-up-right ms-1"></i>
+          </span>
+        </a>
+      </div>
+
+      <div class="skills-controls d-flex justify-content-center gap-3 mt-4">
+        <button
+          class="btn btn-outline-secondary skills-nav-btn"
+          type="button"
+          aria-label="Previous skills"
+          data-skills-prev
+        >
+          <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <button
+          class="btn btn-outline-secondary skills-nav-btn"
+          type="button"
+          aria-label="Next skills"
+          data-skills-next
+        >
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- Projects -->
+<section id="projects" class="section projects-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="section-tag">
+        <i class="bi bi-briefcase me-2"></i> Projects
+      </span>
+
+      <h2 class="section-title">Featured work</h2>
+
+      <p class="section-description">
+        A selection of websites and interfaces I have designed and built using
+        modern front-end tools.
+      </p>
+
+      <p class="projects-note text-muted mt-3 mb-0">
+        Swipe or drag horizontally to explore my featured projects.
+      </p>
+    </div>
+
+    <div class="projects-swiper reveal">
+      <div
+        class="projects-track"
+        id="projectsTrack"
+        tabindex="0"
+        aria-label="Featured projects"
+      >
+        <!-- Project 1 -->
+        <article class="project-card">
+          <div class="project-thumb bg-1">
+            <i class="bi bi-layout-text-window-reverse project-thumb-icon"></i>
+          </div>
+
+          <div class="p-4">
+            <span class="project-tag">
+              <i class="bi bi-window me-1"></i> Landing Page
+            </span>
+
+            <h5 class="fw-bold mt-2">Modern Business Website</h5>
+
+            <p class="text-muted small">
+              A responsive landing page built with Bootstrap and custom CSS.
+            </p>
+
+            <a
+              href="https://github.com/jimpaul-ctu/project-one"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+            >
+              View on GitHub <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card">
+          <div class="project-thumb bg-2">
+            <i class="bi bi-check2-square project-thumb-icon"></i>
+          </div>
+
+          <div class="p-4">
+            <span class="project-tag">
+              <i class="bi bi-phone me-1"></i> Web App
+            </span>
+
+            <h5 class="fw-bold mt-2">Task Manager</h5>
+
+            <p class="text-muted small">
+              A simple task tracker with JavaScript-powered interactions.
+            </p>
+
+            <a
+              href="https://github.com/jimpaul-ctu/project-two"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+            >
+              View on GitHub <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card">
+          <div class="project-thumb bg-3">
+            <i class="bi bi-person-workspace project-thumb-icon"></i>
+          </div>
+
+          <div class="p-4">
+            <span class="project-tag">
+              <i class="bi bi-person me-1"></i> Portfolio
+            </span>
+
+            <h5 class="fw-bold mt-2">Creative Portfolio</h5>
+
+            <p class="text-muted small">
+              A clean personal portfolio with smooth scrolling and modern design.
+            </p>
+
+            <a
+              href="https://github.com/jimpaul-ctu/project-three"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+            >
+              View on GitHub <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 4 -->
+        <article class="project-card">
+          <div class="project-thumb bg-4">
+            <i class="bi bi-shop project-thumb-icon"></i>
+          </div>
+
+          <div class="p-4">
+            <span class="project-tag">
+              <i class="bi bi-bag me-1"></i> E-commerce
+            </span>
+
+            <h5 class="fw-bold mt-2">Online Store UI</h5>
+
+            <p class="text-muted small">
+              A modern e-commerce interface with product cards and a clean checkout layout.
+            </p>
+
+            <a
+              href="https://github.com/jimpaul-ctu/project-four"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+            >
+              View on GitHub <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 5 -->
+        <article class="project-card">
+          <div class="project-thumb bg-5">
+            <i class="bi bi-chat-left-text project-thumb-icon"></i>
+          </div>
+
+          <div class="p-4">
+            <span class="project-tag">
+              <i class="bi bi-chat-dots me-1"></i> Dashboard
+            </span>
+
+            <h5 class="fw-bold mt-2">Chat Dashboard</h5>
+
+            <p class="text-muted small">
+              A responsive messaging dashboard with sidebar navigation and interactive cards.
+            </p>
+
+            <a
+              href="https://github.com/jimpaul-ctu/project-five"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+            >
+              View on GitHub <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 6 -->
+        <article class="project-card">
+          <div class="project-thumb bg-6">
+            <i class="bi bi-journal-text project-thumb-icon"></i>
+          </div>
+
+          <div class="p-4">
+            <span class="project-tag">
+              <i class="bi bi-pencil me-1"></i> Blog
+            </span>
+
+            <h5 class="fw-bold mt-2">Personal Blog</h5>
+
+            <p class="text-muted small">
+              A minimal blog layout with readable typography and responsive article cards.
+            </p>
+
+            <a
+              href="https://github.com/jimpaul-ctu/project-six"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+            >
+              View on GitHub <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div class="projects-controls d-flex justify-content-center gap-3 mt-4">
+        <button
+          class="btn btn-outline-secondary projects-nav-btn"
+          type="button"
+          aria-label="Previous projects"
+          data-projects-prev
+        >
+          <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <button
+          class="btn btn-outline-secondary projects-nav-btn"
+          type="button"
+          aria-label="Next projects"
+          data-projects-next
+        >
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- Contact -->
+  <section id="contact" class="section section-alt">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <span class="section-tag">
+          <i class="bi bi-envelope-paper me-2"></i> Contact
+        </span>
+
+        <h2 class="section-title">Let’s work together</h2>
+
+        <p class="text-muted">
+          Have a project in mind? Send me a message and I’ll get back to you soon.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-5 reveal-left">
+          <div class="contact-card p-4 p-md-5 h-100">
+            <h4 class="fw-bold mb-4">
+              <i class="bi bi-info-circle me-2"></i> Contact information
+            </h4>
+
+            <div class="contact-item">
+              <i class="bi bi-envelope"></i>
+
+              <div>
+                <small>Email</small>
+                <p class="mb-0">orchestratorweb@gmail.com</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <i class="bi bi-telephone"></i>
+
+              <div>
+                <small>Phone</small>
+                <p class="mb-0">09471428661</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <i class="bi bi-github"></i>
+
+              <div>
+                <small>GitHub</small>
+                <p class="mb-0">
+                  <a
+                    class="text-accent text-decoration-none"
+                    href="https://github.com/jimpaul-ctu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    github.com/jimpaul-ctu
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7 reveal-right">
+          <form
+            id="contactForm"
+            class="contact-card p-4 p-md-5 h-100"
+            novalidate
+          >
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label">
+                  <i class="bi bi-person me-1"></i> Name
+                </label>
+
+                <input
+                  type="text"
+                  id="name"
+                  name="from_name"
+                  class="form-control"
+                  placeholder="Your name"
+                  required
+                >
+              </div>
+
+              <div class="col-md-6">
+                <label for="email" class="form-label">
+                  <i class="bi bi-envelope me-1"></i> Email
+                </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="from_email"
+                  class="form-control"
+                  placeholder="you@example.com"
+                  required
+                >
+              </div>
+
+              <div class="col-12">
+                <label for="subject" class="form-label">
+                  <i class="bi bi-chat-left-text me-1"></i> Subject
+                </label>
+
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  class="form-control"
+                  placeholder="Project inquiry"
+                  required
+                >
+              </div>
+
+              <div class="col-12">
+                <label for="message" class="form-label">
+                  <i class="bi bi-pencil-square me-1"></i> Message
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  class="form-control"
+                  placeholder="Tell me about your project..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="col-12">
+                <button
+                  type="submit"
+                  id="submitButton"
+                  class="btn btn-accent btn-lg w-100 rounded-pill"
+                >
+                  <i class="bi bi-send me-2"></i> Send Message
+                </button>
+              </div>
+            </div>
+
+            <div
+              id="formStatus"
+              class="form-status mt-3 mb-0 d-none"
+              role="status"
+              aria-live="polite"
+            ></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <a class="footer-brand fw-bold" href="#home">
+              <i class="bi bi-person-circle me-2"></i> Paul<span class="text-accent">.</span>
+            </a>
+
+            <p class="footer-text mt-3">
+              I create modern, responsive, and user-friendly websites that help brands and individuals
+              stand out online.
+            </p>
+
+            <div class="d-flex gap-3 social-links">
+              <a
+                href="https://github.com/jimpaul-ctu"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+              >
+                <i class="bi bi-github"></i>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/jimpaul-ctu"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <i class="bi bi-linkedin"></i>
+              </a>
+
+              <a
+                href="https://www.instagram.com/your-username"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <i class="bi bi-instagram"></i>
+              </a>
+
+              <a href="mailto:orchestratorweb@gmail.com" aria-label="Email">
+                <i class="bi bi-envelope"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-6 col-lg-2">
+            <h6 class="footer-title">
+              <i class="bi bi-link-45deg me-2"></i> Quick Links
+            </h6>
+
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#skills">Skills</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-lg-2">
+            <h6 class="footer-title">
+              <i class="bi bi-gear me-2"></i> Services
+            </h6>
+
+            <ul class="footer-links">
+              <li><a href="#projects">Web Development</a></li>
+              <li><a href="#projects">UI Design</a></li>
+              <li><a href="#projects">Responsive Websites</a></li>
+              <li><a href="#projects">Landing Pages</a></li>
+              <li><a href="#projects">Website Maintenance</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4">
+            <h6 class="footer-title">
+              <i class="bi bi-envelope-open me-2"></i> Newsletter
+            </h6>
+
+            <p class="footer-text">
+              Subscribe to receive updates about new projects, design tips, and web development resources.
+            </p>
+
+            <form id="newsletterForm" class="newsletter-form" novalidate>
+              <div class="input-group">
+                <input
+                  type="email"
+                  id="newsletterEmail"
+                  class="form-control"
+                  placeholder="Enter your email"
+                  required
+                >
+
+                <button class="btn btn-accent" type="submit">
+                  <i class="bi bi-send"></i>
+                </button>
+              </div>
+
+              <p id="newsletterStatus" class="newsletter-status mt-2 mb-0"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="row align-items-center gy-3">
+          <div class="col-md-6">
+            <p class="mb-0">
+              <i class="bi bi-c-circle me-1"></i>
+              <span id="year"></span> Paul. All rights reserved.
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <ul class="footer-legal d-flex justify-content-md-end gap-4 mb-0">
+              <li>
+                <a href="#">
+                  <i class="bi bi-shield-lock me-1"></i> Privacy Policy
+                </a>
+              </li>
+
+           <li>
+  <a href="terms-and-conditions.html">
+    <i class="bi bi-file-earmark-text me-1"></i> Terms & Conditions
+  </a>
+</li>
+
+              <li>
+                <a href="#contact">
+                  <i class="bi bi-headset me-1"></i> Support
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+<!-- Smart Scroll Button -->
+<div class="scroll-controls" id="scrollControls">
+  <button
+    class="scroll-btn"
+    id="scrollToggleButton"
+    type="button"
+    aria-label="Scroll"
+  >
+    <i class="bi bi-arrow-down" id="scrollIcon"></i>
+  </button>
+</div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    /* =========================================
+       Current year
+    ========================================= */
+    const yearElement = document.getElementById("year");
+
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+
+    /* =========================================
+       Navbar scroll effect
+    ========================================= */
+    const navbar = document.querySelector(".glass-nav");
+
+    function handleNavbarScroll() {
+      if (window.scrollY > 40) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    }
+
+    handleNavbarScroll();
+    window.addEventListener("scroll", handleNavbarScroll, { passive: true });
+
+    /* =========================================
+       Active Navbar Link on Scroll
+    ========================================= */
+    const sections = document.querySelectorAll("section[id], header[id]");
+    const navbarLinks = document.querySelectorAll(".navbar .nav-link");
+
+    function updateActiveNavbarLink() {
+      let currentSection = "home";
+      const scrollPosition = window.scrollY + 150;
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (
+          scrollPosition >= sectionTop &&
+          scrollPosition < sectionBottom
+        ) {
+          currentSection = section.id;
+        }
+      });
+
+      navbarLinks.forEach((link) => {
+        const linkTarget = link.getAttribute("href");
+
+        if (linkTarget === `#${currentSection}`) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    }
+
+    updateActiveNavbarLink();
+
+    window.addEventListener("scroll", updateActiveNavbarLink, {
+      passive: true
+    });
+
+    window.addEventListener("resize", updateActiveNavbarLink);
+
+    /* =========================================
+       Close mobile menu after clicking a link
+    ========================================= */
+    const navMenu = document.getElementById("navMenu");
+    const navLinks = navMenu.querySelectorAll(".nav-link, .btn");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function () {
+        if (navMenu.classList.contains("show")) {
+          bootstrap.Collapse.getInstance(navMenu)?.hide();
+        }
+      });
+    });
+
+    /* =========================================
+       Scroll Up / Down buttons
+    ========================================= */
+   /* =========================================
+   Smart Scroll Button
+========================================= */
+const scrollControls = document.getElementById("scrollControls");
+const scrollToggleButton = document.getElementById("scrollToggleButton");
+const scrollIcon = document.getElementById("scrollIcon");
+
+let lastScrollPosition = window.scrollY;
+
+function updateScrollButton() {
+  const currentScrollPosition = window.scrollY;
+  const isScrollingDown = currentScrollPosition > lastScrollPosition;
+
+  if (isScrollingDown) {
+    scrollIcon.className = "bi bi-arrow-down";
+    scrollToggleButton.setAttribute("aria-label", "Scroll to bottom");
+  } else {
+    scrollIcon.className = "bi bi-arrow-up";
+    scrollToggleButton.setAttribute("aria-label", "Scroll to top");
+  }
+
+  scrollControls.classList.toggle(
+    "visible",
+    currentScrollPosition > 120
+  );
+
+  lastScrollPosition = currentScrollPosition;
+}
+
+function handleScrollButtonClick() {
+  const isDownIcon = scrollIcon.classList.contains("bi-arrow-down");
+
+  if (isDownIcon) {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth"
+    });
+  } else {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+}
+
+if (scrollControls && scrollToggleButton && scrollIcon) {
+  updateScrollButton();
+
+  window.addEventListener("scroll", updateScrollButton, {
+    passive: true
+  });
+
+  scrollToggleButton.addEventListener("click", handleScrollButtonClick);
+}
+    /* =========================================
+       Scroll reveal animation
+    ========================================= */
+    const revealElements = document.querySelectorAll(
+      ".reveal, .reveal-left, .reveal-right, .reveal-scale"
+    );
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+      }
+    );
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    /* =========================================
+       Show More button text
+    ========================================= */
+    const showMoreButton = document.getElementById("showMoreButton");
+    const moreProjects = document.getElementById("moreProjects");
+
+    if (showMoreButton && moreProjects) {
+      moreProjects.addEventListener("show.bs.collapse", function () {
+        showMoreButton.querySelector(".button-text").innerHTML =
+          '<i class="bi bi-dash-circle me-2"></i> Show Less Projects';
+      });
+
+      moreProjects.addEventListener("hide.bs.collapse", function () {
+        showMoreButton.querySelector(".button-text").innerHTML =
+          '<i class="bi bi-plus-circle me-2"></i> Show More Projects';
+      });
+    }
+
+    /* =========================================
+       Contact form validation
+    ========================================= */
+    const contactForm = document.getElementById("contactForm");
+    const formStatus = document.getElementById("formStatus");
+    const submitButton = document.getElementById("submitButton");
+
+    function showFormStatus(message, type) {
+      formStatus.textContent = message;
+      formStatus.classList.remove("d-none", "status-success", "status-error");
+      formStatus.classList.add(type === "success" ? "status-success" : "status-error");
+    }
+
+    if (contactForm) {
+      contactForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name");
+        const email = document.getElementById("email");
+        const subject = document.getElementById("subject");
+        const message = document.getElementById("message");
+
+        if (
+          !name.value.trim() ||
+          !email.value.trim() ||
+          !subject.value.trim() ||
+          !message.value.trim()
+        ) {
+          showFormStatus("Please complete all fields before sending your message.", "error");
+          return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          showFormStatus("Please enter a valid email address.", "error");
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.innerHTML =
+          '<span class="spinner-border spinner-border-sm me-2"></span> Sending...';
+
+        const serviceID = "YOUR_EMAILJS_SERVICE_ID";
+        const templateID = "YOUR_EMAILJS_TEMPLATE_ID";
+
+        emailjs
+          .send(serviceID, templateID, {
+            from_name: name.value.trim(),
+            from_email: email.value.trim(),
+            subject: subject.value.trim(),
+            message: message.value.trim()
+          })
+          .then(function () {
+            showFormStatus("Thank you! Your message has been sent successfully.", "success");
+            contactForm.reset();
+          })
+          .catch(function () {
+            showFormStatus("Sorry, something went wrong. Please try again later.", "error");
+          })
+          .finally(function () {
+            submitButton.disabled = false;
+            submitButton.innerHTML =
+              '<i class="bi bi-send me-2"></i> Send Message';
+          });
+      });
+    }
+
+    /* =========================================
+       Newsletter form
+    ========================================= */
+    const newsletterForm = document.getElementById("newsletterForm");
+    const newsletterEmail = document.getElementById("newsletterEmail");
+    const newsletterStatus = document.getElementById("newsletterStatus");
+
+    if (newsletterForm) {
+      newsletterForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const emailValue = newsletterEmail.value.trim();
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+          newsletterStatus.textContent = "Please enter a valid email address.";
+          newsletterStatus.style.color = "#ffd7d7";
+          return;
+        }
+
+        newsletterStatus.textContent = "Thank you for subscribing!";
+        newsletterStatus.style.color = "#ffffff";
+        newsletterForm.reset();
+      });
+    }
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const track = document.getElementById("skillsTrack");
+    const prevButton = document.querySelector("[data-skills-prev]");
+    const nextButton = document.querySelector("[data-skills-next]");
+
+    if (!track) return;
+
+    const scrollByCard = (direction) => {
+      const card = track.querySelector(".skill-card");
+
+      if (!card) return;
+
+      const cardWidth = card.offsetWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap || 24);
+
+      track.scrollBy({
+        left: direction * (cardWidth + gap),
+        behavior: "smooth"
+      });
+    };
+
+    prevButton?.addEventListener("click", () => scrollByCard(-1));
+    nextButton?.addEventListener("click", () => scrollByCard(1));
+
+    let isDown = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+
+    track.addEventListener("mousedown", (event) => {
+      isDown = true;
+      startX = event.pageX;
+      startScrollLeft = track.scrollLeft;
+      track.classList.add("is-dragging");
+    });
+
+    track.addEventListener("mouseleave", () => {
+      isDown = false;
+      track.classList.remove("is-dragging");
+    });
+
+    track.addEventListener("mouseup", () => {
+      isDown = false;
+      track.classList.remove("is-dragging");
+    });
+
+    track.addEventListener("mousemove", (event) => {
+      if (!isDown) return;
+
+      event.preventDefault();
+      track.scrollLeft = startScrollLeft - (event.pageX - startX);
+    });
+
+    track.addEventListener(
+      "click",
+      (event) => {
+        if (Math.abs(event.pageX - startX) > 8) {
+          event.preventDefault();
+        }
+      },
+      true
+    );
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const track = document.getElementById("projectsTrack");
+    const prevButton = document.querySelector("[data-projects-prev]");
+    const nextButton = document.querySelector("[data-projects-next]");
+
+    if (!track) return;
+
+    const scrollByCard = (direction) => {
+      const card = track.querySelector(".project-card");
+
+      if (!card) return;
+
+      const cardWidth = card.offsetWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap || 24);
+
+      track.scrollBy({
+        left: direction * (cardWidth + gap),
+        behavior: "smooth"
+      });
+    };
+
+    prevButton?.addEventListener("click", () => scrollByCard(-1));
+    nextButton?.addEventListener("click", () => scrollByCard(1));
+
+    let isDown = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+
+    track.addEventListener("mousedown", (event) => {
+      isDown = true;
+      startX = event.pageX;
+      startScrollLeft = track.scrollLeft;
+      track.classList.add("is-dragging");
+    });
+
+    track.addEventListener("mouseleave", () => {
+      isDown = false;
+      track.classList.remove("is-dragging");
+    });
+
+    track.addEventListener("mouseup", () => {
+      isDown = false;
+      track.classList.remove("is-dragging");
+    });
+
+    track.addEventListener("mousemove", (event) => {
+      if (!isDown) return;
+
+      event.preventDefault();
+      track.scrollLeft = startScrollLeft - (event.pageX - startX);
+    });
+
+    track.addEventListener(
+      "click",
+      (event) => {
+        if (Math.abs(event.pageX - startX) > 8) {
+          event.preventDefault();
+        }
+      },
+      true
+    );
+  });
+</script>
+</body>
+</html>
